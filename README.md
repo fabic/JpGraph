@@ -1,5 +1,6 @@
 JpGraph from http://jpgraph.net/
 ======
+
 This is a port for Symfony2 to put JpGraph as a Vendor library,
 by https://github.com/ztec/JpGraph and forked here by https://github.com/fabic
 for pulling in forks and eventual fixes.
@@ -13,3 +14,4 @@ Use `JpGraph\JpGraph::load();` and `JpGraph\JpGraph::module('moduleName');` to l
   at https://packagist.org/packages/jpgraph/jpgraph
 * `refs/tags/v3.5.0b1` references a tree that shall be the exact version of source
   from the official tarball (hence before everyone played with it).
+
