@@ -11,6 +11,7 @@
 require_once 'jpgraph_rgb.inc.php';
 require_once 'jpgraph_ttf.inc.php';
 require_once 'imageSmoothArc.php';
+require_once 'jpgraph_errhandler.inc.php';
 
 // Line styles
 define('LINESTYLE_SOLID',1);
@@ -1660,15 +1661,24 @@ class Image {
     }
 
     // Stream image to browser or to file
-    function Stream($aFile="") {
+    function Stream($aFile=NULL) {
         $this->DoSupersampling();
 
         $func="image".$this->img_format;
         if( $this->img_format=="jpeg" && $this->quality != null ) {
             $res = @$func($this->img,$aFile,$this->quality);
-        }
+			
+			if(!$res){
+				if($aFile != NULL){	
+                    JpGraphError::RaiseL(25107,$aFile);//("Can't write to file '$aFile'. Check that the process running PHP has enough permission.");
+				}else{
+                    JpGraphError::RaiseL(25108);//("Can't stream image. This is most likely due to a faulty PHP/GD setup. Try to recompile PHP and use the built-in GD library that comes with PHP.");
+				}
+		
+			}
+		}
         else {
-            if( $aFile != "" ) {
+            if( $aFile != NULL ) {
                 $res = @$func($this->img,$aFile);
                 if( !$res ) {
                     JpGraphError::RaiseL(25107,$aFile);//("Can't write to file '$aFile'. Check that the process running PHP has enough permission.");
