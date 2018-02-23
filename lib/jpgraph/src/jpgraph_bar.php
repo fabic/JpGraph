@@ -677,11 +677,11 @@ class BarPlot extends Plot {
 // Description: Produce grouped bar plots
 //===================================================
 class GroupBarPlot extends BarPlot {
-    public $plots; 
+    public $plots;
     private $nbrplots=0;
     //---------------
     // CONSTRUCTOR
-    function __construct($plots) {
+    public function __construct($plots) {
         $this->width=0.7;
         $this->plots = $plots;
         $this->nbrplots = count($plots);
